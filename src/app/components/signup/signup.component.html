@@ -9,54 +9,132 @@
         />
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form method="POST" asp-action="Login" asp-controller="Account">
+        <form [formGroup]="signupForm">
           <!-- First Name -->
-          <div class="form-outline mb-4 mt-2">
+          <div
+            class="form-outline mb-4 mt-2"
+            [class.error]="
+              signupForm.controls['firstName'].dirty &&
+              signupForm.hasError('required', 'firstName')
+            "
+          >
             <label class="form-label">First Name</label>
             <input
               type="text"
               class="form-control"
               placeholder="Enter your First Name"
+              formControlName="firstName"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                signupForm.controls['firstName'].dirty &&
+                signupForm.hasError('required', 'firstName')
+              "
+            >
+              firstName is required!</small
+            >
           </div>
+
           <!-- Last Name -->
-          <div class="form-outline mb-4 mt-2">
+          <div
+            class="form-outline mb-4 mt-2"
+            [class.error]="
+              signupForm.controls['lastName'].dirty &&
+              signupForm.hasError('required', 'lastName')
+            "
+          >
             <label class="form-label">Last Name</label>
             <input
               type="text"
               class="form-control"
               placeholder="Enter your Last Name"
+              formControlName="lastName"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                signupForm.controls['lastName'].dirty &&
+                signupForm.hasError('required', 'lastName')
+              "
+              >lastName is required!</small
+            >
           </div>
 
           <!-- Phone Number -->
-          <div class="form-outline mb-4 mt-2">
+          <div
+            class="form-outline mb-4 mt-2"
+            [class.error]="
+              signupForm.controls['phoneNumber'].dirty &&
+              signupForm.hasError('required', 'phoneNumber')
+            "
+          >
             <label class="form-label">Phone Number</label>
             <input
               type="number"
               class="form-control"
               placeholder="Enter your Phone Number"
+              formControlName="phoneNumber"
+              formControlName="phoneNumber"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                signupForm.controls['phoneNumber'].dirty &&
+                signupForm.hasError('required', 'phoneNumber')
+              "
+              >phoneNumber is required!</small
+            >
           </div>
 
           <!-- Email input -->
-          <div class="form-outline mb-4 mt-2">
+          <div
+            class="form-outline mb-4 mt-2"
+            [class.error]="
+              signupForm.controls['email'].dirty &&
+              signupForm.hasError('required', 'email')
+            "
+          >
             <label class="form-label">Email address</label>
             <input
               type="email"
               class="form-control"
               placeholder="Enter a valid email address"
+              formControlName="email"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                signupForm.controls['email'].dirty &&
+                signupForm.hasError('required', 'email')
+              "
+              >email is required!</small
+            >
           </div>
 
           <!-- Password input -->
-          <div class="form-outline mb-3">
+          <div
+            class="form-outline mb-3"
+            [class.error]="
+              signupForm.controls['password'].dirty &&
+              signupForm.hasError('required', 'password')
+            "
+          >
             <label class="form-label">Password</label>
             <input
               [type]="type"
               class="form-control"
               placeholder="Enter password"
+              formControlName="password"
             />
+            <small
+              class="text-danger"
+              *ngIf="
+                signupForm.controls['password'].dirty &&
+                signupForm.hasError('required', 'password')
+              "
+              >password is required!</small
+            >
             <!-- input type is coming from a component (ts file) -->
             <span
               (click)="hideshowPass()"
@@ -67,14 +145,21 @@
           <div class="text-center text-lg-start mt-4 pt-2">
             <button
               type="submit"
-              class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem"
+              class="btn btn-primary"
+              style="padding-left: 1.5rem; padding-right: 1.5rem"
+              [disabled]="signupForm.invalid"
+              (click)="onSubmit()"
             >
               Sign Up
             </button>
             <p class="small fw-bold mt-2 pt-1 mb-0">
               Don't have an account?
-              <a class="link-danger" routerLink="/login">Sign In</a>
+              <a
+                class="link-danger"
+                routerLink="/login"
+                style="text-decoration: none"
+                >Sign In</a
+              >
             </p>
           </div>
         </form>
