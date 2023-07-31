@@ -14,8 +14,8 @@
           <div
             class="form-outline mb-4 mt-2"
             [class.error]="
-              signupForm.controls['firstName'].dirty &&
-              signupForm.hasError('required', 'firstName')
+              signupForm.controls['FirstName'].dirty &&
+              signupForm.hasError('required', 'FirstName')
             "
           >
             <label class="form-label">First Name</label>
@@ -23,13 +23,13 @@
               type="text"
               class="form-control"
               placeholder="Enter your First Name"
-              formControlName="firstName"
+              formControlName="FirstName"
             />
             <small
               class="text-danger"
               *ngIf="
-                signupForm.controls['firstName'].dirty &&
-                signupForm.hasError('required', 'firstName')
+                signupForm.controls['FirstName'].dirty &&
+                signupForm.hasError('required', 'FirstName')
               "
             >
               firstName is required!</small
@@ -40,8 +40,8 @@
           <div
             class="form-outline mb-4 mt-2"
             [class.error]="
-              signupForm.controls['lastName'].dirty &&
-              signupForm.hasError('required', 'lastName')
+              signupForm.controls['LastName'].dirty &&
+              signupForm.hasError('required', 'LastName')
             "
           >
             <label class="form-label">Last Name</label>
@@ -49,24 +49,23 @@
               type="text"
               class="form-control"
               placeholder="Enter your Last Name"
-              formControlName="lastName"
+              formControlName="LastName"
             />
             <small
               class="text-danger"
               *ngIf="
-                signupForm.controls['lastName'].dirty &&
-                signupForm.hasError('required', 'lastName')
+                signupForm.controls['LastName'].dirty &&
+                signupForm.hasError('required', 'LastName')
               "
               >lastName is required!</small
             >
           </div>
-
           <!-- Phone Number -->
           <div
             class="form-outline mb-4 mt-2"
             [class.error]="
-              signupForm.controls['phoneNumber'].dirty &&
-              signupForm.hasError('required', 'phoneNumber')
+              signupForm.controls['PhoneNumber'].dirty &&
+              signupForm.hasError('required', 'PhoneNumber')
             "
           >
             <label class="form-label">Phone Number</label>
@@ -74,14 +73,13 @@
               type="number"
               class="form-control"
               placeholder="Enter your Phone Number"
-              formControlName="phoneNumber"
-              formControlName="phoneNumber"
+              formControlName="PhoneNumber"
             />
             <small
               class="text-danger"
               *ngIf="
-                signupForm.controls['phoneNumber'].dirty &&
-                signupForm.hasError('required', 'phoneNumber')
+                signupForm.controls['PhoneNumber'].dirty &&
+                signupForm.hasError('required', 'PhoneNumber')
               "
               >phoneNumber is required!</small
             >
@@ -91,8 +89,8 @@
           <div
             class="form-outline mb-4 mt-2"
             [class.error]="
-              signupForm.controls['email'].dirty &&
-              signupForm.hasError('required', 'email')
+              signupForm.controls['Email'].dirty &&
+              signupForm.hasError('required', 'Email')
             "
           >
             <label class="form-label">Email address</label>
@@ -100,24 +98,23 @@
               type="email"
               class="form-control"
               placeholder="Enter a valid email address"
-              formControlName="email"
+              formControlName="Email"
             />
             <small
               class="text-danger"
               *ngIf="
-                signupForm.controls['email'].dirty &&
-                signupForm.hasError('required', 'email')
+                signupForm.controls['Email'].dirty &&
+                signupForm.hasError('required', 'Email')
               "
               >email is required!</small
             >
           </div>
-
           <!-- Password input -->
           <div
             class="form-outline mb-3"
             [class.error]="
-              signupForm.controls['password'].dirty &&
-              signupForm.hasError('required', 'password')
+              signupForm.controls['Password'].dirty &&
+              signupForm.hasError('required', 'Password')
             "
           >
             <label class="form-label">Password</label>
@@ -125,13 +122,13 @@
               [type]="type"
               class="form-control"
               placeholder="Enter password"
-              formControlName="password"
+              formControlName="Password"
             />
             <small
               class="text-danger"
               *ngIf="
-                signupForm.controls['password'].dirty &&
-                signupForm.hasError('required', 'password')
+                signupForm.controls['Password'].dirty &&
+                signupForm.hasError('required', 'Password')
               "
               >password is required!</small
             >
@@ -148,7 +145,7 @@
               class="btn btn-primary"
               style="padding-left: 1.5rem; padding-right: 1.5rem"
               [disabled]="signupForm.invalid"
-              (click)="onSubmit()"
+              (click)="onRegister()"
             >
               Sign Up
             </button>

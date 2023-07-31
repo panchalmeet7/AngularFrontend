@@ -14,24 +14,24 @@
           <div
             class="form-outline mb-4 mt-2"
             [class.error]="
-              loginForm.controls['username'].dirty &&
-              loginForm.hasError('required', 'username')
+              loginForm.controls['email'].dirty &&
+              loginForm.hasError('required', 'email')
             "
           >
             <label class="form-label">Email address</label>
             <input
-              type="email"
+              type="text"
               class="form-control"
               placeholder="Enter a valid email address"
-              formControlName="username"
+              formControlName="email"
             />
             <small
               *ngIf="
-                loginForm.controls['username'].dirty &&
-                loginForm.hasError('required', 'username')
+                loginForm.controls['email'].dirty &&
+                loginForm.hasError('required', 'email')
               "
               class="text-danger"
-              >*Username is required!!</small
+              >*Email is required!!</small
             >
           </div>
 
@@ -76,7 +76,7 @@
               type="submit"
               class="btn btn-primary"
               style="padding-left: 1.5rem; padding-right: 1.5rem"
-              (click)="onSubmit()"
+              (click)="onLogin()"
               [disabled]="loginForm.invalid"
             >
               Login
@@ -90,6 +90,26 @@
                 >Sign Up</a
               >
             </p>
+            <div class="mt-5">
+              <button mat-raised-button color="primary" class="mx-5">
+                Primary
+              </button>
+              <mat-form-field>
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
           </div>
         </form>
       </div>
