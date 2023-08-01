@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,44 +14,70 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
-  type:string = "password";
-  isText : boolean = false;
-  eyeIcon :string = "fa-eye-slash";
-  loginForm! : FormGroup;
+  type: string = 'password';
+  isText: boolean = false;
+  eyeIcon: string = 'fa-eye-slash';
+  loginForm!: FormGroup;
   hide = true;
-  
-  constructor (private fb: FormBuilder, private auth: AuthService) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private toast: NgToastService
+  ) {}
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['dashboard']);
+    }
+
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
-      password:['', Validators.required]
-    })
-  }
-  
-  hideshowPass(){
-    this.isText = !this.isText; // make it true and false 
-    this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash"; //if its text then show open eye icon
-    this.isText ? this.type = "text" : this.type = "password"; //if its open eye icon then type text 
+      password: ['', Validators.required],
+    });
   }
 
-  onLogin(){
-    if(this.loginForm.valid){
+  hideshowPass() {
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
+  }
+
+  onLogin() {
+    if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      
-      this.auth.login(this.loginForm.value).subscribe({
-        next:(res)=>{ 
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (res) => {
           console.log(res);
+          this.toast.success({
+            detail: 'SUCCESS',
+            summary: res.message,
+            duration: 3000,
+            position: 'topRight',
+          });
+          this.loginForm.reset();
+          this.authService.storeToken(res.token);
+          this.router.navigate(['dashboard']);
         },
-        error :(err)=>{ 
-          console.log(err.error.message)
-        },  
-      })
-    }
-    else{
-      alert('form is invalid!!');
+        error: (err) => {
+          console.log(err?.error.message);
+          this.toast.error({
+            detail: 'ERROR',
+            summary: err?.error.message,
+            duration: 3000,
+          });
+        },
+      });
+    } else {
+      this.toast.warning({
+        detail: 'WARN',
+        summary: 'Please fill the form correctly!!',
+        duration: 3000,
+        position: 'topRight',
+      });
     }
   }
 }
