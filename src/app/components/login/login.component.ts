@@ -6,8 +6,8 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toast: NgToastService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -50,30 +50,19 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          this.toast.success({
-            detail: 'SUCCESS',
-            summary: res.message,
-            duration: 3000,
-          });
+          // this.toast.success({ detail: 'SUCCESS', summary: res.message });
+          this.toastr.success(res.message);
           this.loginForm.reset();
           this.authService.storeToken(res.token);
           this.router.navigate(['dashboard']);
         },
         error: (err) => {
           console.log(err?.error.message);
-          this.toast.error({
-            detail: 'ERROR',
-            summary: err?.error.message,
-            duration: 3000,
-          });
+          this.toastr.error('ERROR', 'err?.error.message ');
         },
       });
     } else {
-      this.toast.warning({
-        detail: 'WARN',
-        summary: 'Please fill the form correctly!!',
-        duration: 3000,
-      });
+      this.toastr.warning('WARN', 'Please fill the form correctly!!');
     }
   }
 }

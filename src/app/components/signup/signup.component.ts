@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toast: NgToastService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -39,22 +39,13 @@ export class SignupComponent implements OnInit {
       // }
       this.authService.signUp(this.signupForm.value).subscribe({
         next: (response) => {
-          this.toast.success({
-            detail: 'SUCCESS',
-            summary: response.message,
-            duration: 3000,
-          });
+          this.toastr.success(response.message);
           this.signupForm.reset();
           this.router.navigate(['login']);
         },
         error: (error) => {
           console.log(error.error.message);
-          this.toast.error({
-            detail: 'ERROR',
-            summary: error?.error.message,
-            duration: 3000,
-            position: 'topRight',
-          });
+          this.toastr.error('ERROR', error?.error.message);
         },
       });
     } else {
@@ -63,8 +54,8 @@ export class SignupComponent implements OnInit {
   }
 
   hideshowPass() {
-    this.isText = !this.isText; // make it true and false
-    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash'); //if its text then show open eye icon
-    this.isText ? (this.type = 'text') : (this.type = 'password'); //if its open eye icon then type text
+    this.isText = !this.isText;
+    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.isText ? (this.type = 'text') : (this.type = 'password');
   }
 }

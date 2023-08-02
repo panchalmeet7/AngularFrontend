@@ -12,9 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RouterModule, mapToCanActivate } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatInputModule,
     MatFormFieldModule,
     NgToastModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/login', pathMatch: 'full' },
     ]),
