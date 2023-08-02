@@ -7,24 +7,20 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(private httpClient: HttpClient, private route: Router) {}
 
   signUp(RegisterObj: any) {
-    return this.http.post<any>(
+    return this.httpClient.post<any>(
       `${environment.baseUrl}/Account/Register`,
       RegisterObj
     );
   }
 
   login(loginObj: any) {
-    return this.http.post<any>(
+    return this.httpClient.post<any>(
       `${environment.baseUrl}/Account/Authenticate`,
       loginObj
     );
-  }
-
-  getUserData() {
-    return this.http.get<any>(`${environment.baseUrl}/Account/GetAllUsers`);
   }
 
   storeToken(tokenValue: string) {

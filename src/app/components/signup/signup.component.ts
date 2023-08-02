@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router,
     private toast: NgToastService
   ) {}
@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
       // const playLoad = {
       //   firstName: this.signupForm.get('FirstName')?.value || '',
       // }
-      this.auth.signUp(this.signupForm.value).subscribe({
+      this.authService.signUp(this.signupForm.value).subscribe({
         next: (response) => {
           this.toast.success({
             detail: 'SUCCESS',

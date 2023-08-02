@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,18 +9,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  public users: any = [];
+  constructor(
+    private authSerive: AuthService,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.auth.getUserData().subscribe({
-      next: (Userdata) => console.log(Userdata),
-      error: (error) => {
-        console.log(error?.error.message);
-      },
+    this.apiService.getUserData().subscribe((res) => {
+      this.users = res;
     });
   }
 
   LogOut() {
-    this.auth.signout();
+    this.authSerive.signout();
   }
 }

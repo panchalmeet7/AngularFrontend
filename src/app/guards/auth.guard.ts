@@ -14,9 +14,8 @@ export class authGuard implements CanActivate {
   ) {}
 
   canActivate() {
-    // It returns true or false based on some conditions
+    // guard returns true or false based on some conditions
     if (this.auth.isLoggedIn()) {
-      
       return true;
     } else {
       this.toast.error({
@@ -28,5 +27,3 @@ export class authGuard implements CanActivate {
     }
   }
 }
-
-//timestamp : 29:30

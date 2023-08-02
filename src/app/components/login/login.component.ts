@@ -48,15 +48,12 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           this.toast.success({
             detail: 'SUCCESS',
             summary: res.message,
             duration: 3000,
-            position: 'topRight',
           });
           this.loginForm.reset();
           this.authService.storeToken(res.token);
@@ -76,7 +73,6 @@ export class LoginComponent implements OnInit {
         detail: 'WARN',
         summary: 'Please fill the form correctly!!',
         duration: 3000,
-        position: 'topRight',
       });
     }
   }
