@@ -72,7 +72,7 @@
             >
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button
+            <!-- <button
               type="submit"
               class="btn btn-primary"
               style="padding-left: 1.5rem; padding-right: 1.5rem"
@@ -80,6 +80,14 @@
               [disabled]="loginForm.invalid"
             >
               Login
+            </button> -->
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onLogin()"
+              [disabled]="loginForm.invalid"
+            >
+              Sign In
             </button>
             <p class="small fw-bold mt-2 pt-1 mb-0">
               Don't have an account?
@@ -87,8 +95,8 @@
                 class="link-danger"
                 style="text-decoration: none"
                 routerLink="/signup"
-                >Sign Up</a
-              >
+                >Sign Up
+              </a>
             </p>
           </div>
         </form>

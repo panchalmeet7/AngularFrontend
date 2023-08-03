@@ -15,8 +15,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-
 import { ToastrModule } from 'ngx-toastr';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TestComponent } from './components/test/test.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     SignupComponent,
     DashboardComponent,
+    NavbarComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     NgToastModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatTableModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/login', pathMatch: 'full' },

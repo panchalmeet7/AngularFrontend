@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token = this.auth.getToken();
+    const token = this.authService.getToken();
     if (token) {
       request = request.clone({
         setHeaders: { Authorization: `Bearer ${token}` },
@@ -34,11 +34,11 @@ export class TokenInterceptor implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             localStorage.clear();
-            this.toastr.warning('Token has expired, Please Login again!!');
             this.router.navigate(['login']);
+            this.toastr.warning('Token has expired, Please Login again!!');
           }
         }
-        return throwError(() => new Error('some other error occured!!'));
+        return throwError(() => new Error('401 unauthorized error!!'));
       })
     );
   }

@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <mat-icon>density_medium </mat-icon>
+  <span routerLink="dashboard" style="cursor: pointer" class="px-3">
+    Hello, {{ fullName }}
+  </span>
+  <div class="spacer"></div>
+  <a mat-button routerLink="test">Services</a>
+  <a mat-button routerLink="dashboard">Projects</a>
+  <a mat-button routerLink="dashboard">About Us</a>
+  <button mat-raised-button color="accent" class="mx-3" (click)="LogOut()">
+    Sign Out
+  </button>
+</mat-toolbar>
