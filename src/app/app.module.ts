@@ -21,6 +21,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { FormsModule } from '@angular/forms';
+import { ResetComponent } from './components/user/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     NavbarComponent,
     UserTableComponent,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,

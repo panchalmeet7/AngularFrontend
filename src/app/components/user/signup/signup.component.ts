@@ -39,9 +39,13 @@ export class SignupComponent implements OnInit {
       // }
       this.authService.signUp(this.signupForm.value).subscribe({
         next: (response) => {
-          this.toastr.success(response.message);
-          this.signupForm.reset();
-          this.router.navigate(['login']);
+          if (response.statusCode === 200) {
+            this.toastr.success(response.message);
+            this.signupForm.reset();
+            this.router.navigate(['login']);
+          } else {
+            this.toastr.error(response.message);
+          }
         },
         error: (error) => {
           console.log(error.error.message);
