@@ -1,4 +1,8 @@
 export const ErrorMessages = {
+  CommonError: {
+    InterServererror: 'Something went wrong, Please try again later',
+  },
+
   ResetPassword: {
     password: {
       required: 'Password is required',

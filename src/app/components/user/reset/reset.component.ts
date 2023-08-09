@@ -1,12 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMessages } from 'src/app/common/errorMsgs.static';
@@ -35,8 +28,7 @@ export class ResetComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private resetPasswordService: ResetPasswordService,
-    public formValidationService: FormValidationService,
-    private httpClient: HttpClient
+    public formValidationService: FormValidationService
   ) {}
 
   ngOnInit(): void {
@@ -65,9 +57,9 @@ export class ResetComponent implements OnInit {
     );
   }
 
-  //method calls when user presses the change password button
   OnReset() {
     if (this.resetPasswordForm.valid) {
+      console.log(this.resetPasswordObj);
       this.resetPasswordObj.email = this.email;
       this.resetPasswordObj.newPassword = this.resetPasswordForm.value.password;
       this.resetPasswordObj.confirmPassword =
@@ -75,6 +67,9 @@ export class ResetComponent implements OnInit {
       this.resetPasswordObj.emailToken = this.tokenForResetPassword;
       console.log(this.resetPasswordObj);
 
+      this.resetPasswordService
+        .resetPassword(this.resetPasswordObj)
+        .subscribe({});
       this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
         next: (res) => {
           this.toastr.success(res.message);

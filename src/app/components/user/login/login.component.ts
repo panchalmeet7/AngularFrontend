@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { StoreuserService } from 'src/app/services/storeuser.service';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
+import { ErrorMessages } from 'src/app/common/errorMsgs.static';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   forgetPasswordForm!: FormGroup;
   hide = true;
+  errorMessages = ErrorMessages;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
+
     private userStoreService: StoreuserService,
     private resetPasswordService: ResetPasswordService
   ) {}
@@ -72,21 +75,23 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
           if (res.statusCode === 200) {
+            console.log(res.data); //data = token
             this.loginForm.reset();
-            this.authService.storeToken(res.token);
+            this.authService.storeToken(res.data);
             const userPayload = this.authService.decodedToken();
             this.userStoreService.setFullNameForStore(userPayload.unique_name);
             this.userStoreService.setRoleForStore(userPayload.role);
-            this.toastr.success(res.message);
+            this.toastr.success('SUCCESS', res.message);
             this.router.navigate(['dashboard']);
           } else {
-            alert('dshfgsjdfg');
             this.toastr.error(res.message);
           }
         },
         error: (err) => {
-          console.log(err.message);
-          this.toastr.error('ERROR', err.message);
+          this.toastr.error(
+            'ERROR',
+            this.errorMessages.CommonError.InterServererror
+          );
         },
       });
     } else {
@@ -97,15 +102,14 @@ export class LoginComponent implements OnInit {
   SendResetPassLink() {
     if (this.forgetPasswordForm.valid) {
       const mailSend = this.forgetPasswordForm.value.forgetPasswordEmail;
-      console.log(mailSend);
       this.resetPasswordService.sendPasswordResetLink(mailSend).subscribe({
-        next: (response) => {
+        next: (res) => {
+          console.log(res);
           this.forgetPasswordForm.reset();
-          this.toastr.success(`An Email has been sent to ${mailSend}`);
+          this.toastr.success(res.message);
         },
         error: (errorResponse) => {
-          console.log(errorResponse.error);
-          this.toastr.error('Email Doesnt Exist, Please Register First!!');
+          this.toastr.error(errorResponse.message);
         },
       });
     } else {

@@ -48,12 +48,11 @@ export class SignupComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.log(error.error.message);
-          this.toastr.error('ERROR', error?.error.message);
+          this.toastr.error('ERROR', 'Internal server error!!');
         },
       });
     } else {
-      alert('Please fill all fields');
+      this.toastr.error('Please fill all fields');
     }
   }
 
