@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['dashboard']);
-    }
+    // if (this.authService.isLoggedIn()) {
+    //   this.router.navigate(['dashboard']);
+    // }
 
     this.forgetPasswordForm = this.fb2.group({
       forgetPasswordEmail: [
@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
     this.isText ? (this.type = 'text') : (this.type = 'password');
   }
 
+  // login api call method
   onLogin() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
@@ -99,6 +100,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // forget password mail send function
   SendResetPassLink() {
     if (this.forgetPasswordForm.valid) {
       const mailSend = this.forgetPasswordForm.value.forgetPasswordEmail;

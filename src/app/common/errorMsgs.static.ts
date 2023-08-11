@@ -1,6 +1,6 @@
 export const ErrorMessages = {
   CommonError: {
-    InterServererror: 'Something went wrong, Please try again later',
+    InterServererror: 'Server Error!!',
   },
 
   ResetPassword: {

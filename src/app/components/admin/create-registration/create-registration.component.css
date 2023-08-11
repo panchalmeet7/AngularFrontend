@@ -1,0 +1,45 @@
+mat-form-field {
+  width: 100%;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.formDiv {
+  margin-bottom: 200px;
+}
+
+/* .image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("/assets/gymlog.webp");
+  background-blend-mode: lighten;
+}
+
+.image-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+} */
