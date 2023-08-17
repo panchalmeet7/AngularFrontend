@@ -19,7 +19,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './components/admin/navbar/navbar.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ResetComponent } from './components/user/reset/reset.component';
@@ -30,6 +29,19 @@ import { CreateRegistrationComponent } from './components/admin/create-registrat
 import { RegistrationListComponent } from './components/admin/registration-list/registration-list.component';
 import { NgFor } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MemberDetailComponent } from './components/admin/member-detail/member-detail.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/admin/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +54,8 @@ import { FooterComponent } from './components/footer/footer.component';
     CreateRegistrationComponent,
     RegistrationListComponent,
     FooterComponent,
+    MemberDetailComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +79,13 @@ import { FooterComponent } from './components/footer/footer.component';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatCardModule,
+    MatListModule,
+    MatChipsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: '/login', pathMatch: 'full' },

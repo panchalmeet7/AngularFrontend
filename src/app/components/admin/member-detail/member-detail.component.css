@@ -1,0 +1,17 @@
+.example-card {
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.example-header-image-male {
+  background-image: url("/assets/malelogo.jpg");
+  background-size: cover;
+}
+
+.example-header-image-female {
+  background-image: url("/assets/femalelogo.jpg");
+  background-size: cover;
+}

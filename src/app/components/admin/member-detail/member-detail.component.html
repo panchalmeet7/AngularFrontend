@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <mat-card *ngIf="member" class="example-card">
+    <mat-card-header>
+      <div
+        *ngIf="isMale"
+        mat-card-avatar
+        class="example-header-image-male"
+      ></div>
+      <div
+        *ngIf="!isMale"
+        mat-card-avatar
+        class="example-header-image-female"
+      ></div>
+      <mat-card-title
+        >{{ member.firstName }} {{ member.lastName }}</mat-card-title
+      >
+      <mat-card-subtitle>{{ member.emailId }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <div matline>
+            Mobile Number:
+            <button mat-button>{{ member.phoneNo }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matline>
+            Gender:
+            <button mat-button>{{ member.gender }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matline>
+            Package:
+            <button mat-button>{{ member.packageType }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matline>
+            BMI:
+            <button mat-button>{{ member.bmi }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matline>
+            BMI Result:
+            <button mat-button>{{ member.bmiResult }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matline>
+            Goals:
+            <button mat-button>
+              <mat-chip-listbox>
+                <ng-container *ngFor="let row of member.interestsList">
+                  <mat-chip-option selected>
+                    {{ row }}
+                  </mat-chip-option></ng-container
+                >
+              </mat-chip-listbox>
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
