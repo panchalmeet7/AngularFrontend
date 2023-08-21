@@ -17,29 +17,58 @@ mat-form-field {
   margin-bottom: 200px;
 }
 
-/* .image-container {
-  position: relative;
+.image-preview {
   display: inline-block;
+  margin: 10px;
+  position: relative;
 }
 
-.image-container::before {
-  content: "";
-  display: block;
+.image-preview img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.delete-button {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("/assets/gymlog.webp");
-  background-blend-mode: lighten;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
-.image-container img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-} */
+/* kjashdhj */
+
+.dropzone-wrapper {
+  border: 2px dashed #91b0b3;
+  color: #92b0b3;
+  position: relative;
+  height: 150px;
+}
+
+.dropzone-desc {
+  position: absolute;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  top: 50px;
+  font-size: 16px;
+}
+
+.dropzone,
+.dropzone:focus {
+  position: absolute;
+  outline: none !important;
+  width: 100%;
+  height: 150px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.dropzone-wrapper:hover,
+.dropzone-wrapper.dragover {
+  background: #ecf0f5;
+}

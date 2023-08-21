@@ -13,6 +13,87 @@
   <div class="registration-form" class="formDiv">
     <form [formGroup]="registrationForm">
       <div class="row">
+        <div class="col-md-6">
+          <!-- <p>Choose an image file</p>
+          <input
+            type="file"
+            class=""
+            multiple=""
+            (change)="onFileChange($event)"
+            formControlName="images"
+            accept="image/png,image/jpeg,image/jpg"
+          />
+          <div
+            id="gallery"
+            *ngFor="let image of images; let i = index"
+            class="image-preview"
+          >
+            <img [src]="image.url" alt="Preview" />
+            <button (click)="removeImage(i)" class="delete-button">X</button>
+          </div> -->
+          <div class="w-full lg:gap-5 flex-direction">
+            <div class="w-full">
+              <div class="dropzone-wrapper">
+                <div class="dropzone-desc">
+                  <p>Choose an image file or drag it here.</p>
+                </div>
+
+                <input
+                  type="file"
+                  class="dropzone"
+                  multiple=""
+                  (change)="onFileChange($event)"
+                  formControlName="images"
+                  accept="image/png,image/jpeg,image/jpg"
+                />
+              </div>
+              <div class="row">
+                <div
+                  class="column"
+                  [ngClass]="{
+                  'column-height':
+                    images.length>0,
+                }"
+                >
+                  <!-- <ng-container
+                    id="gallery"
+                    *ngFor="let image of images; let i = index"
+                  >
+                    <p
+                      alt="Img"
+                      style="width: 50%; height: 100%; position: relative"
+                    >
+                      <img
+                        [src]="image.url"
+                        style="margin: 3px"
+                        class="w-full h-full"
+                      />
+                      <button
+                        [id]="i"
+                        (click)="removeImage(i)"
+                        style="position: absolute"
+                        class="top-0"
+                      >
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </p>
+                  </ng-container> -->
+                  <div
+                    id="gallery"
+                    *ngFor="let image of images; let i = index"
+                    class="image-preview"
+                  >
+                    <img [src]="image.url" alt="Preview" />
+                    <button (click)="removeImage(i)" class="delete-button">
+                      X
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- firstname -->
         <div class="col-md-6">
           <mat-form-field appearance="outline">

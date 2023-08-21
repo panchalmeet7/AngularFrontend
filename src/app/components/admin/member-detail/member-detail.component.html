@@ -2,16 +2,7 @@
 <div class="container mt-5">
   <mat-card *ngIf="member" class="example-card">
     <mat-card-header>
-      <div
-        *ngIf="isMale"
-        mat-card-avatar
-        class="example-header-image-male"
-      ></div>
-      <div
-        *ngIf="!isMale"
-        mat-card-avatar
-        class="example-header-image-female"
-      ></div>
+      <div mat-card-avatar class="{{ pngImageClass }}"></div>
       <mat-card-title
         >{{ member.firstName }} {{ member.lastName }}</mat-card-title
       >

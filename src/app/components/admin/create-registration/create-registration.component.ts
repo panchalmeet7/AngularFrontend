@@ -6,16 +6,21 @@ import { ValidatorsPattern } from 'src/app/common/validator.static';
 import { Members } from 'src/app/models/members.model';
 import { ApiService } from 'src/app/services/api.service';
 
+interface ImagePreview {
+  url: string;
+  file: File;
+}
+
 @Component({
   selector: 'app-create-registration',
   templateUrl: './create-registration.component.html',
   styleUrls: ['./create-registration.component.css'],
 })
 export class CreateRegistrationComponent implements OnInit {
-  private validatorsPattern = ValidatorsPattern;
-  public packages: string[] = ['Monthly', 'Quaterly', 'Yearly'];
-  public genders: string[] = ['Male', 'Female'];
-  public importantLists: string[] = [
+  validatorsPattern = ValidatorsPattern;
+  packages: string[] = ['Monthly', 'Quaterly', 'Yearly'];
+  genders: string[] = ['Male', 'Female'];
+  importantLists: string[] = [
     'Toxic fat reduction',
     'Fitness',
     'Sugar craving body',
@@ -35,10 +40,11 @@ export class CreateRegistrationComponent implements OnInit {
     'Boxing',
   ];
 
-  public registrationForm!: FormGroup;
-  public memberID!: number;
-  public isUpdateActive: boolean = false;
+  registrationForm!: FormGroup;
+  memberID!: number;
+  isUpdateActive: boolean = false;
   minDate = new Date();
+  images: ImagePreview[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -66,6 +72,7 @@ export class CreateRegistrationComponent implements OnInit {
       interestsList: ['', Validators.required],
       beenGym: ['', Validators.required],
       enquiryDate: ['', Validators.required],
+      images: [''],
     });
 
     this.registrationForm.controls['height'].valueChanges.subscribe((res) =>
@@ -134,10 +141,14 @@ export class CreateRegistrationComponent implements OnInit {
     }
   }
 
-  // on click of submit btn
+  // on click of a submit btn
   onSubmit() {
-    console.log(this.registrationForm.value);
-    this.apiService.onRegistration(this.registrationForm.value).subscribe({
+    const payload = {
+      data: this.registrationForm.value,
+      images: this.images,
+    };
+    console.log(payload);
+    this.apiService.onRegistration(payload).subscribe({
       next: (res) => {
         console.log(res);
         this.toastr.success('SUCCESS');
@@ -151,7 +162,7 @@ export class CreateRegistrationComponent implements OnInit {
     });
   }
 
-  // on click of update btn
+  // on click of an update btn
   onUpdate() {
     console.log(this.registrationForm.value);
     this.apiService
@@ -170,5 +181,24 @@ export class CreateRegistrationComponent implements OnInit {
           this.toastr.error('ERROR');
         },
       });
+  }
+
+  // convert image into base64 and push into an images array
+  onFileChange(event: any) {
+    event.preventDefault();
+    const files: FileList = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.images.push({ url: e.target.result, file });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // delete image from an images array
+  removeImage(index: number): void {
+    this.images.splice(index, 1);
   }
 }

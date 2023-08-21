@@ -12,6 +12,7 @@ export class MemberDetailComponent implements OnInit {
   private memberId!: number;
   public member!: Members;
   public isMale!: boolean;
+  public pngImageClass: string = 'example-header-image-male';
 
   constructor(
     private apiService: ApiService,
@@ -27,9 +28,9 @@ export class MemberDetailComponent implements OnInit {
             console.log(data);
             this.member = data;
             if (this.member.gender == 'Male') {
-              this.isMale = true;
+              this.pngImageClass;
             } else {
-              this.isMale = false;
+              this.pngImageClass = 'example-header-image-female';
             }
           },
           error: (err) => {

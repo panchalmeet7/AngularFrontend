@@ -14,7 +14,7 @@ export class ApiService {
   }
 
   // gym members CRUD
-  onRegistration(registerObj: Members) {
+  onRegistration(registerObj: any) {
     return this.http.post<Members>(`${environment.apiUrl}`, registerObj);
   }
 
