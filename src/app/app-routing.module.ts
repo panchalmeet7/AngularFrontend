@@ -13,17 +13,31 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'reset', component: ResetComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'list', component: RegistrationListComponent },
-  { path: 'register', component: CreateRegistrationComponent },
-  { path: 'detail/:id', component: MemberDetailComponent },
-  { path: 'update/:id', component: CreateRegistrationComponent },
-  // { path: '/', redirectTo: 'register', pathMatch: 'full' },
-  // {
-  //   path: 'dashboard',
-  //   component: DashboardComponent,
-  //   canActivate: [authGuard],
-  // },
+  {
+    path: 'list',
+    component: RegistrationListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'register',
+    component: CreateRegistrationComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'detail/:id',
+    component: MemberDetailComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'update/:id',
+    component: CreateRegistrationComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({

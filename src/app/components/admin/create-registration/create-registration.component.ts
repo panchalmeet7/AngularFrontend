@@ -60,7 +60,10 @@ export class CreateRegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      emailId: ['', Validators.pattern(this.validatorsPattern.email)],
+      emailId: [
+        '',
+        [Validators.required, Validators.pattern(this.validatorsPattern.email)],
+      ],
       phoneNo: ['', Validators.pattern(this.validatorsPattern.mobileNumber)],
       weight: ['', Validators.required],
       height: ['', Validators.required],
@@ -81,20 +84,16 @@ export class CreateRegistrationComponent implements OnInit {
 
     // Activated route to get the id from the url
     this.activatedRoute.params.subscribe((params) => {
-      if (params['id'] != 0) {
-        this.memberID = params['id']; //we got this from url
-        this.apiService.getSingleMemberById(this.memberID).subscribe({
-          next: (res) => {
-            this.isUpdateActive = true;
-            this.fillForm(res);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      } else {
-        this.memberID = 0;
-      }
+      this.memberID = params['id']; //we got this from url
+      this.apiService.getSingleMemberById(this.memberID).subscribe({
+        next: (res) => {
+          this.isUpdateActive = true;
+          this.fillForm(res);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     });
   }
 

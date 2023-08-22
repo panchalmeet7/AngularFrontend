@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (this.authService.isLoggedIn()) {
-    //   this.router.navigate(['dashboard']);
-    // }
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['dashboard']);
+    }
 
     this.forgetPasswordForm = this.fb2.group({
       forgetPasswordEmail: [

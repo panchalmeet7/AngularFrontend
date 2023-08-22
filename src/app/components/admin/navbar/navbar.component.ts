@@ -23,18 +23,14 @@ export class NavbarComponent implements OnInit {
       this.currentDate = new Date().toISOString();
     }, 1000); // Update every 1000 milliseconds (1 second)
 
-    // let registerDate = new Date().toJSON().toString();
-    // this.currentDate = registerDate;
-    // console.log(this.currentDate);
-    // this.datepipe = currentDateTime;
-    // this.userStoreService.getFullNameFromStore().subscribe({
-    //   next: (val) => {
-    //     let roleFromToken = this.authSerive.getRoleFromToken(); //they are both observable
-    //     let fullNameFromToken = this.authSerive.getFullNameFromToken();
-    //     this.role = val || roleFromToken;
-    //     this.fullName = val || fullNameFromToken;
-    //   },
-    // });
+    this.userStoreService.getFullNameFromStore().subscribe({
+      next: (val) => {
+        let roleFromToken = this.authSerive.getRoleFromToken(); //they are both observable
+        let fullNameFromToken = this.authSerive.getFullNameFromToken();
+        this.role = val || roleFromToken;
+        this.fullName = val || fullNameFromToken;
+      },
+    });
   }
 
   LogOut() {

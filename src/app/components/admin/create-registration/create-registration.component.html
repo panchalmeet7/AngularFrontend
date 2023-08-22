@@ -14,23 +14,6 @@
     <form [formGroup]="registrationForm">
       <div class="row">
         <div class="col-md-6">
-          <!-- <p>Choose an image file</p>
-          <input
-            type="file"
-            class=""
-            multiple=""
-            (change)="onFileChange($event)"
-            formControlName="images"
-            accept="image/png,image/jpeg,image/jpg"
-          />
-          <div
-            id="gallery"
-            *ngFor="let image of images; let i = index"
-            class="image-preview"
-          >
-            <img [src]="image.url" alt="Preview" />
-            <button (click)="removeImage(i)" class="delete-button">X</button>
-          </div> -->
           <div class="w-full lg:gap-5 flex-direction">
             <div class="w-full">
               <div class="dropzone-wrapper">
@@ -55,29 +38,6 @@
                     images.length>0,
                 }"
                 >
-                  <!-- <ng-container
-                    id="gallery"
-                    *ngFor="let image of images; let i = index"
-                  >
-                    <p
-                      alt="Img"
-                      style="width: 50%; height: 100%; position: relative"
-                    >
-                      <img
-                        [src]="image.url"
-                        style="margin: 3px"
-                        class="w-full h-full"
-                      />
-                      <button
-                        [id]="i"
-                        (click)="removeImage(i)"
-                        style="position: absolute"
-                        class="top-0"
-                      >
-                        <mat-icon>cancel</mat-icon>
-                      </button>
-                    </p>
-                  </ng-container> -->
                   <div
                     id="gallery"
                     *ngFor="let image of images; let i = index"
@@ -126,6 +86,17 @@
               formControlName="emailId"
             />
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error
+              *ngIf="registrationForm.controls['emailId'].hasError('required')"
+              >Email is required</mat-error
+            >
+            <mat-error
+              *ngIf="
+                registrationForm.controls['emailId'].hasError('pattern') &&
+                registrationForm.controls['emailId'].touched
+              "
+              >Enter a valid email</mat-error
+            >
           </mat-form-field>
         </div>
 
